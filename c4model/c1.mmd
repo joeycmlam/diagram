@@ -1,0 +1,46 @@
+
+C4Context
+
+title Digital ecoSystem online platform
+
+    Person_Ext(C, "client", "Customer", "onboarding, account management, transaction, portfolio management")
+
+    Enterprise_Boundary(c0, "Wealth Management") {
+
+        Person(A, "Agent", "Agent")
+        Person(WO, "Operation", "Wealth Operation")
+
+        Boundary(online_platform, "Online Platform") {
+            System(online_client, "Customer Digital Platform")
+            System(online_agent, "Agent Digital Platform")
+        }
+
+        Boundary(backoffice_platform, "Backoffice Platform") {
+            System(workflow, "Workflow Platform")
+            System(backoffice, "Backoffice Platform")
+        }
+
+        Boundary(ta_platform, "Transfer Agent Platforms") {
+            System_Ext(ta, "Sub Transfer Agent Platform")
+            System_Ext(fh, "Fund House Platform")
+        }
+
+        Boundary(fund_platform, "Fund Market Data Platform") {
+            System(fund, "Fund Maintanence Platform")
+            System_Ext(fundinfo, "Fund Market Data Platform")
+        }
+
+        Rel(C, online_client, "submit request")
+        Rel(A, online_agent, "view their clients' data")
+        Rel(WO, backoffice, "review, approve/reject customers request")
+        Rel(online_client, workflow, "onboarding and transaction", "https")
+        Rel(workflow, ta, "transfer request")
+        Rel(ta, fh, "trading")
+
+
+        UpdateElementStyle(C, $bgColor="green")
+        UpdateRelStyle(C, online_client, $lineColor="green")
+
+
+    }
+
