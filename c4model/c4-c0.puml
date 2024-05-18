@@ -1,0 +1,32 @@
+@startuml "techtribesjs"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+' uncomment the following line and comment the first to use locally
+' !include C4_Container.puml
+
+LAYOUT_TOP_DOWN()
+'LAYOUT_AS_SKETCH()
+LAYOUT_WITH_LEGEND()
+
+Person(C, "client", "Customer Digital Experience")
+Person(A, "Agent", "Agent Digital Experience")
+Person(WO, "Operation", "Wealth Operation")
+
+Enterprise_Boundary(c0, "Wealth Management") {
+    System(online_client, "Customer Digital Platform")
+    System(online_agent, "Agent Digital Platform")
+    System(workflow, "Workflow Platform")
+    System(backoffice, "Backoffice Platform")
+    System_Ext(ta, "Sub Transfer Agent Platform")
+    System_Ext(fh, "Fund House Platform")
+    System_Ext(fundinfo, "Fund Market Data Platform")
+}
+
+Rel(C, online_client, "onboarding, account management, transaction, portfolio management")
+Rel(A, online_agent, "view their clients information")
+Rel(workflow, ta, "onboarding, transaction", "https")
+Rel(WO, workflow, "review, approve/reject request")
+Rel(workflow, backoffice, "save the records")
+Rel(ta, fh, "send transaction")
+Rel(ta, backoffice, "feed latest data")
+
+@enduml

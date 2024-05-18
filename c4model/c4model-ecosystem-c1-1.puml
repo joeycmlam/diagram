@@ -1,0 +1,47 @@
+@startuml OnlineTradingPlatformDiagram
+title Retail online Platform - System Context Diagram
+
+actor Client as C
+actor "Operations User" as WO
+actor "Compliance User" as CU
+actor "Advisor" as AU
+actor "Business User" as BU
+
+package "Online Digital Platform" #green{
+    [Customer Digital Platform] as CDP
+    [Advisor Digital Platform] as ADP
+}
+
+package "Operational Systems" {
+    [Workflow System] as WS
+    [Back Office System] as BOS
+    [Fund Maintenance System] as FMS
+    [Reporting System] as RS
+}
+
+package "Firm Standard Platform" {
+    [Compliance System] as CS
+}
+
+node "Sub TA" as TA
+node "Fund House" as FH
+node "FundInfo" as FI
+
+C --[#green]> CDP : client boarding, online transaction, portfolio enquiry
+CDP --[#green]> WS : passes Request
+WO --[#green]> WS : reviews request and then approve/reject
+WS --[#green]> BOS : save records
+WS --[#green]> VP : send the request
+VP --[#green]> FH: processes Request
+VP --[#green]> BOS : update the latest data update
+BOS --[#blue]> CS: client, transaction feed
+CU --[#blue]> CS: compliance check
+BU --[#blue]> FMS : fund maintenance
+FI --[#blue]> FMS : provide fund information
+VP --[#blue]> FMS : provide other fund information
+CDP --[#blue]> RS : login activity feed
+BOS --[#blue]> RS : client feed
+VP --[#blue]> RS : transaction, holding feed
+GU --[#blue]> RS : review the statistics reports
+
+@enduml

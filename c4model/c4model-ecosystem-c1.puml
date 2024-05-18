@@ -1,0 +1,41 @@
+@startuml OnlineTradingPlatformDiagram
+title Retail online Platform - System Context Diagram
+
+
+actor Client as C
+actor "Operations User" as WO
+actor "Compliance User" as CU
+actor "Advisor" as AU
+actor "Business User" as BU
+
+package "Online Digital Platform" #green{
+    [Customer Digital Platform] as CDP
+    [Advisor Digital Platform] as ADP
+}
+
+package "Operational Systems" {
+    [Workflow System] as WS
+    [Back Office System] as BOS
+    [Fund Maintenance System] as FMS
+    [Reporting System] as RS
+}
+
+package "Firm Standard Platform" {
+    [Compliance System] as CS
+}
+
+node "Sub TA" as TA
+node "Fund House" as FH
+node "FundInfo" as FI
+
+C --[#green]> CDP
+AU --[#green]> ADP
+CDP --[#green]> WS
+WO --[#blue]> "Operational Systems"
+BU --[#blue]> "Operational Systems"
+"Operational Systems" <--[#green]> TA
+TA <--[#green]> FH
+BOS --[#blue]> "Firm Standard Platform"
+CU --[#blue]> "Firm Standard Platform"
+FI --[#blue]> FMS
+@enduml
