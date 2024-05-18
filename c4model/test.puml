@@ -1,0 +1,21 @@
+@startuml
+title Online Trading Platform - System Context Diagram
+
+actor Customer as C
+actor "Operations User" as OU
+
+package "Online Trading Platform" {
+    [Customer Facing Digital Platform] as CDP
+    [Workflow System] as WS
+    [Back Office System] as BOS
+    [Vendor Platform] as VP
+}
+
+C --> CDP : Sends Request
+CDP --> WS : Passes Request
+OU --> WS : Reviews Request
+WS --> BOS : Approves/Rejects Request
+BOS --> VP : Processes Request
+VP --> WS : Proceeds Further
+
+@enduml
