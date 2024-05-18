@@ -34,4 +34,5 @@ Rel(ta, backoffice, "feed latest data")
 Rel(fundinfo, fund, "get the latest fund information")
 Rel(fund, online_client, "provide fund data")
 
+
 @enduml

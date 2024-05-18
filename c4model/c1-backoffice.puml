@@ -10,8 +10,8 @@ System_Boundary(backoffice, "Back office") {
     Container(rsp_api, "RSP", "Nodejs", "https")
     Container(rule_api, "Rule Engine", "Nodejs", "https")
     Container(batch, "Batch", "Pentaho")
-    ContainerDb(dbcore, "Core Database", "SQLMI", "https")
-    ContainerDb(dbrsp, "RSP Database", "SQLMI", "https")
+    ContainerDb(dbcore, "Core Database", "SQLMI")
+    ContainerDb(dbrsp, "RSP Database", "SQLMI")
     ContainerDb(nosql, "MongoDB", "MongoDB", "https")
 }
 
@@ -23,6 +23,15 @@ System_Boundary(fund, "Fund Maintenance") {
     ContainerDb(rdbs_fund, "Database", "SQLMI")
     Container(fund_ui, "Fund UI", "reactjs")
     Container(fund_portal_api, "Fund Portal API", "Nodejs", "graphQL")
+}
+
+System_Boundary(reporting, "Reporting platform") {
+    ContainerDb(dbA, "Report Database", "SQLMI")
+    ContainerDb(dbF, "Finance Report Database", "SQLMI")
+    Container(python_batch, "Pythong Batch")
+    Container(report_pbi, "Power BI")
+    Container(finance_web, "Finance Web", "asp.net")
+    Container(finance_api, "Finance Batch", "vb.net")
 }
 
 System_Ext(online_client, "Digital Customer Platform", "React", "https")
