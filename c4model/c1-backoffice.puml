@@ -1,0 +1,37 @@
+@startuml "backoffice"
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+LAYOUT_WITH_LEGEND()
+
+System_Boundary(backoffice, "Back office") {
+    Container(backend_api_v1, "APIv1", "Nodejs", "https")
+    Container(backend_api_v3, "APIv3", "Nodejs", "https")
+    Container(rsp_api, "RSP", "Nodejs", "https")
+    Container(rule_api, "Rule Engine", "Nodejs", "https")
+    Container(batch, "Batch", "Pentaho")
+    ContainerDb(dbcore, "Core Database", "SQLMI", "https")
+    ContainerDb(dbrsp, "RSP Database", "SQLMI", "https")
+    ContainerDb(nosql, "MongoDB", "MongoDB", "https")
+}
+
+System_Boundary(fund, "Fund Maintenance") {
+    Container(fund_api, "Fund API", "Nodejs", "https")
+    Container(fund_ng_api, "Fund NG API", "Nodejs", "https")
+    Container(factsheet, "Factsheet", "Nodejs")
+    ContainerDb(nosql_fund, "MongoDB", "MongoDB")
+    ContainerDb(rdbs_fund, "Database", "SQLMI")
+    Container(fund_ui, "Fund UI", "reactjs")
+    Container(fund_portal_api, "Fund Portal API", "Nodejs", "graphQL")
+}
+
+System_Ext(online_client, "Digital Customer Platform", "React", "https")
+System_Ext(workflow, "Workflow Engine", "Nodejs", "https")
+System_Ext(fundinfo, "Fund Market Data Platform")
+
+Rel(online_client, backoffice, "read", "https")
+Rel(workflow, backoffice, "read/write", "https")
+Rel(online_client, fund, "read", "https")
+Rel(fund, fundinfo, "retrieve data", "https")
+
+@enduml

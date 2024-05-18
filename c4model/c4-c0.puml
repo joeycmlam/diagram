@@ -16,17 +16,22 @@ Enterprise_Boundary(c0, "Wealth Management") {
     System(online_agent, "Agent Digital Platform")
     System(workflow, "Workflow Platform")
     System(backoffice, "Backoffice Platform")
+    System(fund, "Fund Maintanence Platform")
     System_Ext(ta, "Sub Transfer Agent Platform")
     System_Ext(fh, "Fund House Platform")
     System_Ext(fundinfo, "Fund Market Data Platform")
 }
 
 Rel(C, online_client, "onboarding, account management, transaction, portfolio management")
+Rel(online_client, workflow, "send the request", "https")
+Rel(online_client, backoffice, "enquiry the data", "https")
 Rel(A, online_agent, "view their clients information")
 Rel(workflow, ta, "onboarding, transaction", "https")
 Rel(WO, workflow, "review, approve/reject request")
 Rel(workflow, backoffice, "save the records")
 Rel(ta, fh, "send transaction")
 Rel(ta, backoffice, "feed latest data")
+Rel(fundinfo, fund, "get the latest fund information")
+Rel(fund, online_client, "provide fund data")
 
 @enduml
