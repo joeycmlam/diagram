@@ -30,12 +30,17 @@ title Digital ecoSystem online platform
             System_Ext(fundinfo, "Fund Market Data Platform")
         }
 
+        Boundary(firm_platform, "Firm Common Platforms across LOB") {
+            System(aml, "Compliance / AML Platform")
+        }
+
         Rel(C, online_client, "submit request")
         Rel(A, online_agent, "view their clients' data")
         Rel(WO, backoffice, "review, approve/reject customers request")
         Rel(online_client, workflow, "onboarding and transaction", "https")
         Rel(workflow, ta, "transfer request")
         Rel(ta, fh, "trading")
+        Rel(backoffice, aml, "data feed")
 
 
         UpdateElementStyle(C, $bgColor="green")
